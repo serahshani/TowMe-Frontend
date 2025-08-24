@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useAuth } from "../app/auth/context/AuthContext";
+
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -30,13 +34,48 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Call to Action */}
-        <Link
-          href="/request"
-          className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition"
-        >
-          Request Tow
-        </Link>
+        {/* Actions */}
+        <div className="flex items-center space-x-4">
+          {!user ? (
+            <>
+              {/* Login Button */}
+              <Link
+                href="/auth/login"
+                className="text-gray-700 hover:text-green-700 font-medium"
+              >
+                Login
+              </Link>
+
+              {/* Signup Button */}
+              <Link
+                href="/auth/signup"
+                className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition"
+              >
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="text-gray-700 font-medium">
+                {user.name}
+              </span>
+              <button
+                onClick={logout}
+                className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition"
+              >
+                Logout
+              </button>
+            </>
+          )}
+
+          {/* Request Tow (always visible) */}
+          <Link
+            href="/request"
+            className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
+          >
+            Request Tow
+          </Link>
+        </div>
       </div>
     </motion.nav>
   );
