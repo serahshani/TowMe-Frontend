@@ -1,9 +1,9 @@
+// src/components/Navbar.jsx
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useAuth } from "../app/auth/context/AuthContext";
-
+import { useAuth } from "../auth/context/AuthContext";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -29,52 +29,40 @@ export default function Navbar() {
           <Link href="#about" className="text-gray-700 hover:text-green-700">
             About
           </Link>
-          <Link href="#contact" className="text-gray-700 hover:text-green-700">
+          <Link href="#contact" className="text-700 hover:text-green-700">
             Contact
           </Link>
         </div>
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
-          {!user ? (
+          {user ? (
             <>
-              {/* Login Button */}
+              {/* If user is logged in, show a link to the Request Tow page */}
               <Link
-                href="/auth/login"
-                className="text-gray-700 hover:text-green-700 font-medium"
-              >
-                Login
-              </Link>
-
-              {/* Signup Button */}
-              <Link
-                href="/auth/signup"
+                href="/request-tow" // The dedicated page for logged-in users
                 className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition"
               >
-                Sign Up
+                Request Tow
               </Link>
-            </>
-          ) : (
-            <>
-              <span className="text-gray-700 font-medium">
-                {user.name}
-              </span>
               <button
                 onClick={logout}
-                className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition"
+                className="text-gray-700 font-medium hover:text-green-700 transition"
               >
                 Logout
               </button>
             </>
+          ) : (
+            <>
+              {/* If no user is logged in, show a link that redirects to login */}
+              <Link
+                href="/auth/login"
+                className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition"
+              >
+                Request Tow
+              </Link>
+            </>
           )}
-
-          {/* Request Tow (always visible) */}
-          <Link
-            href="/request"
-            className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
-          >
-            Request Tow
-          </Link>
         </div>
       </div>
     </motion.nav>
