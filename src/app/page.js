@@ -1,8 +1,14 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/Hero";
-import Footer from "@/components/Footer";
+// import Navbar from "@/components/Navbar";
+// import HeroSection from "@/components/Hero";
+// import Footer from "@/components/Footer";
 import { Import } from "lucide-react";
-import { Services, About, Contact } from "@/components/Sections";
+import { Services, About, Contact } from "../components/Sections";
+// import Footer from "@/components/Footer";
+
+import Footer from "../components/Footer"
+import HeroSection from "../components/Hero";
+import Navbar from "../components/Navbar";
+
 
 export default function Home() {
   return (

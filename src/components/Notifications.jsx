@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import {Card, CardContent} from "./ui/card";
+import { Card, CardContent } from "./ui/card";
 
-const Notifications = () => {
+export default function Notifications() {
   const [notifications, setNotifications] = useState([
     { id: 1, message: "Your towing request is pending approval." },
     { id: 2, message: "Driver has accepted your request." },
@@ -25,4 +25,3 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;

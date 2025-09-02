@@ -6,10 +6,11 @@ import { motion } from "framer-motion";
 import RequestForm from "@/components/RequestForm";
 import RequestsList from "@/components/RequestsList";
 import ReviewForm from "@/components/ReviewForm";
-import Notifications from "@/components/Notifications";
+// import Notifications from "@/components/Notifications";
 import Profile from "@/components/Profile";
 import { useAuth } from "../../../auth/context/AuthContext";
 import { useRouter } from "next/navigation";
+import Notifications from "@/components/Notifications";
 
 export default function DashboardPage() {
   const { user } = useAuth();
