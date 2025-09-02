@@ -5,6 +5,27 @@ import { Phone, Mail, MapPin, Car, Wrench, Clock } from "lucide-react";
 
 // ---------------- Services Section ----------------
 export function Services() {
+
+  const serviceDetails = [
+
+    {
+      icon: <Car className="w-10 h-10 text-green-600" />,
+      title: "24/7 Towing",
+      desc: "Reliable and fast towing services available anytime, anywhere."
+    },
+    {
+      icon: <Wrench className="w-10 h-10 text-green-600" />,
+      title: "Roadside Assistance",
+      desc: "Battery jump-starts, tire changes, and emergency support."
+    },
+    {
+      icon: <Clock className="w-10 h-10 text-green-600" />,
+      title: "Quick Response",
+      desc: "We guarantee fast arrival times to get you back on the road quickly."
+    }
+  ]
+
+
   return (
     <section className="bg-gray-50 py-20" id="services">
       <div className="max-w-7xl mx-auto px-6 text-center">
@@ -17,23 +38,7 @@ export function Services() {
           Our Services
         </motion.h2>
         <div className="grid text-black grid-cols-1 md:grid-cols-3 gap-10">
-          {[
-            {
-              icon: <Car className="w-10 h-10 text-green-600" />,
-              title: "24/7 Towing",
-              desc: "Reliable and fast towing services available anytime, anywhere."
-            },
-            {
-              icon: <Wrench className="w-10 h-10 text-green-600" />,
-              title: "Roadside Assistance",
-              desc: "Battery jump-starts, tire changes, and emergency support."
-            },
-            {
-              icon: <Clock className="w-10 h-10 text-green-600" />,
-              title: "Quick Response",
-              desc: "We guarantee fast arrival times to get you back on the road quickly."
-            }
-          ].map((service, index) => (
+          {serviceDetails.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
