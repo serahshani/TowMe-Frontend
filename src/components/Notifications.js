@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "./ui/card";
 
-export default function Notifications() {
+const Notifications = () => {
   const [notifications, setNotifications] = useState([
     { id: 1, message: "Your towing request is pending approval." },
     { id: 2, message: "Driver has accepted your request." },
@@ -25,3 +25,4 @@ export default function Notifications() {
   );
 };
 
+export default Notifications;

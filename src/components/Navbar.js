@@ -3,7 +3,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useAuth } from "../auth/context/AuthContext";
+import { useAuth } from "../../src/app/auth/context/AuthContext";
+// import { useAuth } from "../auth/context/AuthContext";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
