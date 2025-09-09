@@ -1,17 +1,16 @@
 "use client";
 
 import React from "react";
-import Card from "@/components/ui/card";
+import Card from "../../../components/ui/card";
 import { motion } from "framer-motion";
-import RequestForm from "@/components/RequestForm";
-import RequestsList from "@/components/RequestsList";
-import ReviewForm from "@/components/ReviewForm";
-import Notifications from "@/components/Notifications";
-import Profile from "@/components/Profile";
+import RequestForm from "../../../components/RequestForm";
+import RequestsList from "../../../components/RequestsList";
+import ReviewForm from "../../../components/ReviewForm";
+import Notifications from "../../../components/Notifications";
+import Profile from "../../../components/Profile";
 // import { useAuth } from "../../../auth/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/auth/context/AuthContext";
-
+import { useAuth } from "../../../app/auth/context/AuthContext";
 export default function DashboardPage() {
   const { user } = useAuth();
   const router = useRouter();

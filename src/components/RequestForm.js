@@ -1,40 +1,40 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { 
-  MapPin, 
-  Car, 
-  Phone, 
-  User, 
-  AlertTriangle, 
+import {
+  MapPin,
+  Car,
+  Phone,
+  User,
+  AlertTriangle,
   Clock,
   Navigation,
   CheckCircle
 } from "lucide-react";
+import { useState } from "react";
 
-export default function RequestPage() {
+export default function RequestForm() {
   const [formData, setFormData] = useState({
     // Personal Info
     fullName: "",
     phoneNumber: "",
     email: "",
-    
+
     // Vehicle Details
     vehicleMake: "",
     vehicleModel: "",
     vehicleYear: "",
     vehicleColor: "",
     licensePlate: "",
-    
+
     // Issue Details
     issueType: "",
     issueDescription: "",
-    
+
     // Location
     currentLocation: "",
     destinationLocation: "",
-    
+
     // Additional Info
     urgencyLevel: "normal",
     additionalNotes: ""
@@ -70,7 +70,7 @@ export default function RequestPage() {
 
   const getCurrentLocation = () => {
     setLocationLoading(true);
-    
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -83,7 +83,7 @@ export default function RequestPage() {
         },
         (error) => {
           setLocationLoading(false);
-          alert("Could not get your location. Please enter manually.");
+          alert("Could not get your location. Please enter manually." + error);
         }
       );
     } else {
@@ -94,6 +94,7 @@ export default function RequestPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setSubmitted(true);
   };
 
@@ -108,7 +109,7 @@ export default function RequestPage() {
           <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-black mb-4">Request Submitted!</h2>
           <p className="text-gray-800 mb-6">
-            We've received your towing request. Our team will contact you within 5-10 minutes 
+            We've received your towing request. Our team will contact you within 5-10 minutes
             with an estimated arrival time.
           </p>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
@@ -286,7 +287,7 @@ export default function RequestPage() {
               <AlertTriangle className="w-6 h-6 text-green-600 mr-3" />
               <h2 className="text-2xl font-semibold text-black">Issue Details</h2>
             </div>
-            
+
             <div className="mb-6">
               <label className="block text-sm font-medium text-black mb-3">
                 What's the issue? *
@@ -295,11 +296,10 @@ export default function RequestPage() {
                 {issueTypes.map((issue) => (
                   <label
                     key={issue.value}
-                    className={`flex items-center p-4 border rounded-lg cursor-pointer transition ${
-                      formData.issueType === issue.value
-                        ? 'border-green-500 bg-green-50'
-                        : 'border-gray-300 hover:border-green-300'
-                    }`}
+                    className={`flex items-center p-4 border rounded-lg cursor-pointer transition ${formData.issueType === issue.value
+                      ? 'border-green-500 bg-green-50'
+                      : 'border-gray-300 hover:border-green-300'
+                      }`}
                   >
                     <input
                       type="radio"
@@ -338,11 +338,10 @@ export default function RequestPage() {
                 {urgencyLevels.map((level) => (
                   <label
                     key={level.value}
-                    className={`flex items-center justify-center p-3 border rounded-lg cursor-pointer transition ${
-                      formData.urgencyLevel === level.value
-                        ? 'border-green-500 bg-green-50'
-                        : 'border-gray-300 hover:border-green-300'
-                    }`}
+                    className={`flex items-center justify-center p-3 border rounded-lg cursor-pointer transition ${formData.urgencyLevel === level.value
+                      ? 'border-green-500 bg-green-50'
+                      : 'border-gray-300 hover:border-green-300'
+                      }`}
                   >
                     <input
                       type="radio"
@@ -367,7 +366,7 @@ export default function RequestPage() {
               <MapPin className="w-6 h-6 text-green-600 mr-3" />
               <h2 className="text-2xl font-semibold text-black">Location Information</h2>
             </div>
-            
+
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
@@ -396,7 +395,7 @@ export default function RequestPage() {
                   Click the location button to auto-detect your current position
                 </p>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
                   Where should we tow your vehicle?
@@ -419,7 +418,7 @@ export default function RequestPage() {
               <Clock className="w-6 h-6 text-green-600 mr-3" />
               <h2 className="text-2xl font-semibold text-black">Additional Information</h2>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-black mb-2">
                 Additional Notes
