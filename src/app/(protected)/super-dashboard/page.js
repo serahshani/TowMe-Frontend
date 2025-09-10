@@ -25,6 +25,36 @@ const serviceTypeData = [
   { name: "Jump Start", value: 10, color: "#60a5fa" },
 ]
 
+const requestSerice = [
+  {
+    id: "SR-001",
+    type: "Emergency Tow",
+    location: "Highway 101, Mile 45",
+    time: "2 min ago",
+    priority: "high",
+  },
+  {
+    id: "SR-002",
+    type: "Jump Start",
+    location: "Downtown Mall Parking",
+    time: "8 min ago",
+    priority: "medium",
+  },
+  {
+    id: "SR-003",
+    type: "Roadside Assist",
+    location: "Oak Street & 5th Ave",
+    time: "15 min ago",
+    priority: "low",
+  },
+  {
+    id: "SR-004",
+    type: "Vehicle Recovery",
+    location: "Industrial District",
+    time: "23 min ago",
+    priority: "high",
+  }
+]
 export default function DashboardPage() {
   return (
     <DashboardLayout>
@@ -157,36 +187,7 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {[
-                  {
-                    id: "SR-001",
-                    type: "Emergency Tow",
-                    location: "Highway 101, Mile 45",
-                    time: "2 min ago",
-                    priority: "high",
-                  },
-                  {
-                    id: "SR-002",
-                    type: "Jump Start",
-                    location: "Downtown Mall Parking",
-                    time: "8 min ago",
-                    priority: "medium",
-                  },
-                  {
-                    id: "SR-003",
-                    type: "Roadside Assist",
-                    location: "Oak Street & 5th Ave",
-                    time: "15 min ago",
-                    priority: "low",
-                  },
-                  {
-                    id: "SR-004",
-                    type: "Vehicle Recovery",
-                    location: "Industrial District",
-                    time: "23 min ago",
-                    priority: "high",
-                  },
-                ].map((request) => (
+                {requestSerice.map((request) => (
                   <div key={request.id} className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="flex items-center space-x-3">
                       <div
@@ -267,7 +268,7 @@ export default function DashboardPage() {
           </Card>
         </div>
       </div>
-    </DashboardLayout>
+    </DashboardLayout >
   )
 }
 

@@ -3,8 +3,9 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Button } from "../components/ui/button"
+// import { Button } from "../components/ui/button"
 import { Truck, Users, Settings, BarChart3, UserCheck, LogOut, Menu, X, Home, Phone } from "lucide-react"
+import { Button } from "./ui/button"
 
 export function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
