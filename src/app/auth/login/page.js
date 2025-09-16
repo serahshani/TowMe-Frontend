@@ -1,174 +1,99 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
-import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { FaUserCircle } from 'react-icons/fa';
 
 export default function LoginPage() {
-  const router = useRouter();
   const { login } = useAuth();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const success = login(email, password);
-    if (success) {
-      toast.success("Login successful 🎉", {
-        style: {
-          borderRadius: "10px",
-          background: "#166534", // dark green
-          color: "#fff",
-        },
-      });
-      setTimeout(() => {
-        router.push("/dashboard"); // ✅ redirect to user dashboard
-      }, 1500); // wait 1.5s to let user see toast
-    } else {
-      toast.error("Invalid email or password ❌", {
-        style: {
-          borderRadius: "10px",
-          background: "#fef2f2", // soft red background
-          color: "#dc2626", // red text
-        },
-      });
-    }
-  };
-
-  const handleGoogleLogin = async () => {
+    setError(null); // Clear previous errors
     try {
-      // --- START OF PLACEHOLDER FOR AUTHENTICATION LIBRARY ---
-      // Replace this with your actual Google login logic
-      // e.g., using NextAuth.js or Firebase Auth.
-      console.log("Attempting to log in with Google...");
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      // --- END OF PLACEHOLDER ---
-
-      toast.success("Logged in with Google successfully!", {
-        position: "bottom-center",
-      });
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
-
-    } catch (error) {
-      console.error("Google login failed:", error);
-      toast.error("Failed to log in with Google. Please try again.", {
-        position: "bottom-center",
-      });
+      await login(email, password);
+      router.push("/dashboard");
+    } catch (err) {
+      // Set a user-friendly error message
+      setError("Login failed. Please check your email and password.");
+      console.error("Login failed:", err);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Toaster position="bottom-center" reverseOrder={false} />
-
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
       <motion.div
-        className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 md:p-12"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="w-full max-w-sm p-8 bg-white rounded-xl shadow-2xl border border-gray-200"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         <div className="text-center mb-8">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-12 w-12 mx-auto text-green-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-            />
-          </svg>
-          <h2 className="text-3xl font-extrabold text-gray-800 mt-4">
-            Welcome Back
-          </h2>
-          <p className="text-gray-500 mt-2">
-            Log in to access your account.
-          </p>
+          <div className="flex justify-center items-center mb-4">
+            <FaUserCircle className="text-5xl text-green-600" />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
+          <p className="text-gray-500 mt-2">Sign in to your account to continue.</p>
         </div>
+        
+        <form onSubmit={handleLogin}>
+          {error && (
+            <div className="bg-red-100 text-red-700 p-3 rounded-lg text-sm mb-4" role="alert">
+              {error}
+            </div>
+          )}
 
-        {/* Social Login Button */}
-        <div className="space-y-4 mb-6">
-          <button
-            type="button"
-            onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition"
-          >
-            <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google logo" className="h-5 w-5" />
-            Login with Google
-          </button>
-        </div>
-
-        <div className="relative flex items-center my-6">
-          <div className="flex-grow border-t border-gray-300"></div>
-          <span className="flex-shrink mx-4 text-gray-400 text-sm">Or continue with</span>
-          <div className="flex-grow border-t border-gray-300"></div>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Email Address</label>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="email">
+              Email Address
+            </label>
             <input
               type="email"
+              id="email"
+              placeholder="you@example.com"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg bg-gray-50 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-colors duration-300"
-              placeholder="e.g., jane.doe@example.com"
               required
             />
           </div>
-
-          {/* Password */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Password</label>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="password">
+              Password
+            </label>
             <input
               type="password"
+              id="password"
+              placeholder="••••••••"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg bg-gray-50 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-colors duration-300"
-              placeholder="Enter your password"
               required
             />
           </div>
-
-          {/* Forgot Password Link */}
-          <div className="text-right">
-            <Link
-              href="/auth/forgot-password"
-              className="text-sm font-medium text-green-600 hover:text-green-700 transition"
-            >
-              Forgot Password?
-            </Link>
-          </div>
-
-          {/* Submit */}
+          
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300"
+            className="w-full bg-green-600 text-white font-semibold py-2.5 rounded-lg hover:bg-green-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500"
           >
             Log In
           </button>
         </form>
-
-        {/* Redirect to Sign Up */}
-        <p className="text-center text-gray-500 text-sm mt-6">
-          Don’t have an account?{" "}
-          <Link
-            href="/auth/signup"
-            className="text-green-600 font-semibold hover:text-green-700 transition"
-          >
-            Sign Up
-          </Link>
-        </p>
+        
+        <div className="mt-6 text-center text-sm">
+          <p className="text-gray-500">
+            Don't have an account?{" "}
+            <a href="/auth/signup" className="text-green-600 hover:text-green-800 font-medium">
+              Sign Up
+            </a>
+          </p>
+        </div>
       </motion.div>
     </div>
   );
