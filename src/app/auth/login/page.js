@@ -41,7 +41,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
           <p className="text-gray-500 mt-2">Sign in to your account to continue.</p>
         </div>
-        
+
         <form onSubmit={handleLogin}>
           {error && (
             <div className="bg-red-100 text-red-700 p-3 rounded-lg text-sm mb-4" role="alert">
@@ -77,7 +77,7 @@ export default function LoginPage() {
               required
             />
           </div>
-          
+
           <button
             type="submit"
             className="w-full bg-green-600 text-white font-semibold py-2.5 rounded-lg hover:bg-green-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -85,10 +85,10 @@ export default function LoginPage() {
             Log In
           </button>
         </form>
-        
+
         <div className="mt-6 text-center text-sm">
           <p className="text-gray-500">
-            Don't have an account?{" "}
+            Don't have an account?
             <a href="/auth/signup" className="text-green-600 hover:text-green-800 font-medium">
               Sign Up
             </a>
