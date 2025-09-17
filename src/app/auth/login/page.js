@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from "react-icons/fa";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -17,11 +17,14 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null); // Clear previous errors
     try {
-      await login(email, password);
-      router.push("/dashboard");
+      const loggedIn = await login(email, password);
+      if (loggedIn) {
+        router.push("/dashboard/user"); // ✅ Redirect to user dashboard
+      } else {
+        setError("Invalid email or password.");
+      }
     } catch (err) {
-      // Set a user-friendly error message
-      setError("Login failed. Please check your email and password.");
+      setError("Login failed. Please try again.");
       console.error("Login failed:", err);
     }
   };
@@ -39,18 +42,26 @@ export default function LoginPage() {
             <FaUserCircle className="text-5xl text-green-600" />
           </div>
           <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
-          <p className="text-gray-500 mt-2">Sign in to your account to continue.</p>
+          <p className="text-gray-500 mt-2">
+            Sign in to your account to continue.
+          </p>
         </div>
 
         <form onSubmit={handleLogin}>
           {error && (
-            <div className="bg-red-100 text-red-700 p-3 rounded-lg text-sm mb-4" role="alert">
+            <div
+              className="bg-red-100 text-red-700 p-3 rounded-lg text-sm mb-4"
+              role="alert"
+            >
               {error}
             </div>
           )}
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-medium mb-1"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <input
@@ -64,7 +75,10 @@ export default function LoginPage() {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-medium mb-1"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -88,8 +102,16 @@ export default function LoginPage() {
 
         <div className="mt-6 text-center text-sm">
           <p className="text-gray-500">
+<<<<<<< HEAD
             Don't have an account?
             <a href="/auth/signup" className="text-green-600 hover:text-green-800 font-medium">
+=======
+            Don't have an account?{" "}
+            <a
+              href="/auth/signup"
+              className="text-green-600 hover:text-green-800 font-medium"
+            >
+>>>>>>> 94b29116eee62b939a9ec80cbdab822c3eb640e2
               Sign Up
             </a>
           </p>
