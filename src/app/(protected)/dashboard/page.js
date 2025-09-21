@@ -1,23 +1,17 @@
 "use client";
 
 import React from "react";
-import Card from "../../../components/ui/card";
+import { Card } from "../../../components/ui/card";
 import { motion } from "framer-motion";
 import RequestForm from "../../../components/RequestForm";
 import RequestsList from "../../../components/RequestsList";
 import ReviewForm from "../../../components/ReviewForm";
 import Notifications from "../../../components/Notifications";
 import Profile from "../../../components/Profile";
-<<<<<<< HEAD
-// import { useAuth } from "../../../auth/context/AuthContext";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../../app/auth/context/AuthContext";
-=======
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../auth/context/AuthContext";
 import { FaUserCircle, FaBell, FaClipboardList, FaFileSignature, FaPlusCircle } from 'react-icons/fa';
 
->>>>>>> 4c54b6114b2a43e223fefc72a59d01c68b770b68
 export default function DashboardPage() {
   const { user } = useAuth();
   const router = useRouter();
