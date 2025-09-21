@@ -22,7 +22,7 @@ export function DashboardLayout({ children }) {
     { name: "Service Requests", href: "/dashboard/requests", icon: Phone, current: false },
     { name: "Driver Management", href: "/dashboard/drivers", icon: Users, current: false },
     { name: "Fleet Management", href: "/dashboard/fleet", icon: Truck, current: false },
-    { name: "Customer Management", href: "/dashboard/customers", icon: UserCheck, current: false },
+    { name: "Customer Management", href: "/dashboard/user", icon: UserCheck, current: false },
     { name: "Reports", href: "/dashboard/reports", icon: BarChart3, current: false },
     { name: "Settings", href: "/dashboard/settings", icon: Settings, current: false },
   ]
